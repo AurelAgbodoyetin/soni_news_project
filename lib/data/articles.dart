@@ -121,3 +121,11 @@ final Article article7 = Article.fromMap(
         "Berlin Sie darf als Erste die Bühne betreten. Bundeskanzlerin Dr. Angela Merkel, ruft die Moderatorin ins Mikrofon. Im gelben Blazer winkt sie in die Halle. Erst dann folgen CSU-Chef Markus Söder und… [+11709 chars]"
   },
 );
+
+final List<Article> artList = [
+  article1,
+  article5,
+  article3,
+  article4,
+  article2
+];

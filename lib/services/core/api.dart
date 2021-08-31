@@ -20,8 +20,8 @@ final List<String> categories = [
 
 String makeEverythingUrl({
   required String q,
-  required String sortBy,
-  required String lang,
+  String sortBy = "relevancy",
+  String lang = "en",
 }) {
   assert(sorts.contains(sortBy));
   assert(languages.contains(lang));
@@ -35,8 +35,8 @@ String makeEverythingUrl({
 
 String makeCategoryHeadlinesUrl({
   required String category,
-  required String sortBy,
-  required String lang,
+  String sortBy = "relevancy",
+  String lang = "en",
 }) {
   assert(categories.contains(category));
   assert(sorts.contains(sortBy));
@@ -48,19 +48,19 @@ String makeCategoryHeadlinesUrl({
   return "$kBaseUrl/top-headlines?category=$category&from=$yesterday&to=$today&sortBy=$sortBy&language=$lang&apiKey=$kApiKey";
 }
 
-String makeTrendingUrl({required String lang}) {
+String makeTrendingUrl({String lang = "en"}) {
   assert(languages.contains(lang));
   String country = getRandomElement(countries);
   String sortBy = getRandomElement(sorts);
 
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   String yesterday =
-      formatter.format(DateTime.now().subtract(Duration(days: 1)));
+      formatter.format(DateTime.now().subtract(Duration(days: 3)));
   String today = formatter.format(DateTime.now());
   return "$kBaseUrl/top-headlines?country=$country&from=$yesterday&to=$today&sortBy=$sortBy&language=$lang&apiKey=$kApiKey";
 }
 
-String makeSearchUrl({required String q, required String lang}) {
+String makeSearchUrl({required String q, String lang = "en"}) {
   String sortBy = "relevancy";
 
   assert(sorts.contains(sortBy));

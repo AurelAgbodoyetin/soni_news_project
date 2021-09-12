@@ -9,7 +9,7 @@ class SharedPrefsHelperImpl implements SharedPrefsHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     late bool isSeen;
     try {
-      isSeen = prefs.getBool('isSeen') ?? true;
+      isSeen = prefs.getBool('isSeen') ?? false;
     } catch (e) {
       return left(AppError.UNEXPECTED);
     }
@@ -57,7 +57,7 @@ class SharedPrefsHelperImpl implements SharedPrefsHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       int n = prefs.getInt('offline') ?? 0;
-      await prefs.setInt('offline', n++);
+      await prefs.setInt('offline', n + 1);
     } catch (e) {
       return left(AppError.UNEXPECTED);
     }
@@ -69,7 +69,8 @@ class SharedPrefsHelperImpl implements SharedPrefsHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       int n = prefs.getInt('online') ?? 0;
-      await prefs.setInt('online', n++);
+
+      await prefs.setInt('online', n + 1);
     } catch (e) {
       return left(AppError.UNEXPECTED);
     }
@@ -81,7 +82,18 @@ class SharedPrefsHelperImpl implements SharedPrefsHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       int n = prefs.getInt('read') ?? 0;
-      await prefs.setInt('read', n++);
+      await prefs.setInt('read', n + 1);
+    } catch (e) {
+      return left(AppError.UNEXPECTED);
+    }
+    return right(unit);
+  }
+
+  @override
+  Future<Either<AppError, Unit>> updateIsSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      await prefs.setBool('isSeen', true);
     } catch (e) {
       return left(AppError.UNEXPECTED);
     }

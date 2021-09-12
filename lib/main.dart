@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:soni_news_project/controllers/core/controllers_instances.dart';
+import 'package:soni_news_project/controllers/core/put_controllers.dart';
 import 'package:soni_news_project/screens/all_tabs/all_tabs.dart';
-import 'package:soni_news_project/services/dio_helper/dio_helper.dart';
-import 'package:soni_news_project/services/dio_helper/dio_helper_impl.dart';
+import 'package:soni_news_project/screens/onboarding/onboarding.dart';
 import 'package:soni_news_project/utils/theme.dart';
 
 void main() async {
-  DioHelper d = DioHelperImpl();
-  var a = await d.getTrending("en"); //("general", "relevancy", "en");
-  print(a);
+  WidgetsFlutterBinding.ensureInitialized();
+  initControllers();
   runApp(SoniNewsApp());
 }
 
 class SoniNewsApp extends StatelessWidget {
+  const SoniNewsApp({
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Soni News App',
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: AllTabs(),
+      home: Obx(
+        () {
+          if (onboardingController.isSeen.value) {
+            return AllTabs();
+          } else {
+            return OnboardingPage();
+          }
+        },
+      ),
     );
   }
 }

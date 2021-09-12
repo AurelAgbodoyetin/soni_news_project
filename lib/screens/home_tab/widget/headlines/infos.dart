@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:soni_news_project/controllers/core/controllers_instances.dart';
 import 'package:soni_news_project/models/article.dart';
 import 'package:soni_news_project/utils/colors.dart';
 import 'package:soni_news_project/utils/extensions.dart';
@@ -37,19 +39,22 @@ class ArticleInfos extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline3,
                   ),
                 ),
-                //TODO Add onTap
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      //TODO Handle onPressed
-                    },
-                    icon: Icon(
-                      Icons.bookmark_border_outlined,
-                      color: kPrimaryColor,
-                      size: 25.0,
+                Obx(() {
+                  return Expanded(
+                    child: IconButton(
+                      onPressed: () {
+                        articleController.saveArticle(article);
+                      },
+                      icon: Icon(
+                        articleController.checkIfOffline(article)
+                            ? Icons.bookmark
+                            : Icons.bookmark_border_outlined,
+                        color: kPrimaryColor,
+                        size: 25.0,
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                }),
                 Expanded(
                   child: IconButton(
                     onPressed: () {

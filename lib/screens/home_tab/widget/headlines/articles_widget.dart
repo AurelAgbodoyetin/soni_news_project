@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:soni_news_project/data/articles.dart';
+import 'package:soni_news_project/models/article.dart';
 import 'package:soni_news_project/screens/home_tab/widget/headlines/article_card.dart';
 
 class ArticlesWidget extends StatelessWidget {
-  final int category;
+  final List<Article> articles;
   ArticlesWidget({
     Key? key,
-    required this.category,
+    required this.articles,
   }) : super(key: key);
 
   @override
@@ -14,11 +14,11 @@ class ArticlesWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ListView.builder(
-        itemCount: artList.length,
+        itemCount: articles.length,
         scrollDirection: Axis.horizontal,
         physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) {
-          return ArticleCard(article: artList[index]);
+          return ArticleCard(article: articles[index]);
         },
       ),
     );

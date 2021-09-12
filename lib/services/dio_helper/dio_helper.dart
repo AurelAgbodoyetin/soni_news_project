@@ -4,10 +4,10 @@ import 'package:soni_news_project/services/errors/app_errors.dart';
 
 abstract class DioHelper {
   Future<Either<AppError, List<Article>>> getHeadlines(
-    String category,
-    String sortBy,
-    String lang,
-  );
+    String category, {
+    String sortBy = "relevancy",
+    String lang = "en",
+  });
 
   Future<Either<AppError, List<Article>>> getSearchResults(
     String q,

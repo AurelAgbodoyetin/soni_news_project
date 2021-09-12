@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:soni_news_project/controllers/core/controllers_instances.dart';
 import 'package:soni_news_project/models/article.dart';
 import 'package:soni_news_project/utils/colors.dart';
 import 'package:soni_news_project/utils/extensions.dart';
@@ -25,19 +27,22 @@ class TrendingArticlesInfos extends StatelessWidget {
           flex: 1,
           child: Row(
             children: [
-              Expanded(
-                flex: 1,
-                child: IconButton(
-                  onPressed: () {
-                    //TODO Handle onPressed
-                  },
-                  icon: Icon(
-                    Icons.bookmark_border_outlined,
-                    color: kPrimaryColor,
-                    size: 20.0,
+              Obx(() {
+                return Expanded(
+                  child: IconButton(
+                    onPressed: () {
+                      articleController.saveArticle(article);
+                    },
+                    icon: Icon(
+                      articleController.checkIfOffline(article)
+                          ? Icons.bookmark
+                          : Icons.bookmark_border_outlined,
+                      color: kPrimaryColor,
+                      size: 25.0,
+                    ),
                   ),
-                ),
-              ),
+                );
+              }),
               Expanded(
                 flex: 1,
                 child: IconButton(

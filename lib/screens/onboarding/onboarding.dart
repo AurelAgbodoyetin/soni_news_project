@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:soni_news_project/controllers/core/controllers_instances.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class OnboardingPage extends StatelessWidget {
             SizedBox(height: 20.0),
             TextButton(
               onPressed: () {
-                //TODO Handle onPressed
+                onboardingController.updateIsSeen();
               },
               child: Text(
                 "Get Started",

@@ -6,6 +6,7 @@ abstract class SharedPrefsHelper {
   Future<Either<AppError, int>> getNReadArticles();
   Future<Either<AppError, int>> getNOfflineArticles();
   Future<Either<AppError, int>> getNOnlineArticles();
+  Future<Either<AppError, Unit>> updateIsSeen();
   Future<Either<AppError, Unit>> updateNReadArticles();
   Future<Either<AppError, Unit>> updateNOfflineArticles();
   Future<Either<AppError, Unit>> updateNOnlineArticles();

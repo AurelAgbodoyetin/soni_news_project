@@ -13,11 +13,8 @@ class DioHelperImpl implements DioHelper {
   }
 
   @override
-  Future<Either<AppError, List<Article>>> getHeadlines(
-    String category,
-    String sortBy,
-    String lang,
-  ) async {
+  Future<Either<AppError, List<Article>>> getHeadlines(String category,
+      {String sortBy = 'relevancy', String lang = "en"}) async {
     String _url = makeCategoryHeadlinesUrl(
       category: category,
       sortBy: sortBy,
@@ -43,7 +40,6 @@ class DioHelperImpl implements DioHelper {
 
   @override
   Future<Either<AppError, List<Article>>> callApi(String url) async {
-    print(url);
     Future<Response> _response;
     late Response _responseAwaited;
     try {
